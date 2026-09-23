@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>E_commerce.Core</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Authentication\Commands\**\*.cs" />
+    <Compile Remove="Features\Authentication\SignInHandlerBase.cs" />
+    <Compile Remove="Features\Authorization\**\*.cs" />
+    <Compile Remove="Features\User's\**\*.cs" />
+    <Compile Remove="Mapping\**\*.cs" />
+    <Compile Remove="Specifications\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.2.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\E-commerce.Data\E-commerce.Data.csproj" />
+    <ProjectReference Include="..\E-commerce.Service\E-commerce.Service.csproj" />
+  </ItemGroup>
+
+</Project>
