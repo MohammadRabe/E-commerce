@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || "https://localhost:7280/api/v1";
+const API_BASE = import.meta.env.VITE_API_URL || "https://e-commerce-sooq-gzgdczg3g8gvg8du.polandcentral-01.azurewebsites.net/api/v1";
 
 export function connectOrderNotifications(onNotification) {
   let stopped = false;
