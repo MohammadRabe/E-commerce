@@ -21,7 +21,7 @@ public sealed class OrderService : BaseService, IOrderService
         {
             UserId = userId,
             ShippingAddress = request.ShippingAddress.Trim(),
-            ShippingPhoneNumber = request.ShippingPhoneNumber?.Trim(),
+            ShippingPhoneNumber = request.ShippingPhoneNumber.Trim(),
             Status = E_commerce.Data.Enum.OrderStatus.Pending
         };
 
@@ -78,6 +78,15 @@ public sealed class OrderService : BaseService, IOrderService
             .OrderByDescending(order => order.CreatedAt)
             .ToListAsync(cancellationToken);
 
+    public async Task<IReadOnlyList<Order>> GetByStatusAsync(
+        E_commerce.Data.Enum.OrderStatus status,
+        CancellationToken cancellationToken = default,
+        params Expression<Func<Order, object?>>[] includes) =>
+        await _uow.OrderRepository.GetAll(includes: includes)
+            .Where(order => order.Status == status)
+            .OrderByDescending(order => order.CreatedAt)
+            .ToListAsync(cancellationToken);
+
     public  async Task<Order> AddAsync(Order entity, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -98,6 +107,30 @@ public sealed class OrderService : BaseService, IOrderService
 
         _uow.OrderRepository.Edit(existing);
         await _uow.SaveAsync();
+        return existing;
+    }
+
+    public async Task<Order> UpdateStatusAsync(int orderId, E_commerce.Data.Enum.OrderStatus status, CancellationToken cancellationToken = default)
+    {
+        await using var transaction = await _uow.OrderRepository.BeginTransactionAsync(cancellationToken);
+        var existing = await _uow.OrderRepository.GetById(orderId, cancellationToken, order => order.Items)
+            ?? throw new KeyNotFoundException($"Order {orderId} was not found.");
+
+        if (existing.Status != E_commerce.Data.Enum.OrderStatus.Cancelled && status == E_commerce.Data.Enum.OrderStatus.Cancelled)
+        {
+            foreach (var item in existing.Items)
+            {
+                var product = await _uow.ProductRepository.GetById(item.ProductId, cancellationToken)
+                    ?? throw new KeyNotFoundException($"Product {item.ProductId} was not found.");
+                product.StockQuantity += item.Quantity;
+                _uow.ProductRepository.Edit(product);
+            }
+        }
+
+        existing.Status = status;
+        _uow.OrderRepository.Edit(existing);
+        await _uow.SaveAsync();
+        await transaction.CommitAsync(cancellationToken);
         return existing;
     }
 

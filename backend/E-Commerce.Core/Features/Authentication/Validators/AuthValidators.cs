@@ -8,6 +8,12 @@ public sealed class SignUpValidator : AbstractValidator<SignUpCommand>
     public SignUpValidator()
     {
         RuleFor(x => x.UserName).NotEmpty().MaximumLength(256);
+        RuleFor(x => x.FullName)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .Must(name => name.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Length == 2)
+            .WithMessage("Full name must contain exactly a first name and a last name.")
+            .MaximumLength(200);
         RuleFor(x => x.Email).NotEmpty().EmailAddress().MaximumLength(256);
         RuleFor(x => x.Password).NotEmpty().MinimumLength(6);
     }

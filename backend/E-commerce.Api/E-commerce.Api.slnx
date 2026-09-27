@@ -1,7 +1,7 @@
 <Solution>
-  <Project Path="../E-Commerce.Core/E-Commerce.Core.csproj" Id="1c368511-eec0-439c-afb4-84e0be056c14" />
+  <Project Path="../E-Commerce.Core/E-Commerce.Core.csproj" Id="1c368511-eec0-439c-afb4-84e0be056c14" DisplayName="E-commerce.Core" />
   <Project Path="../E-commerce.Data/E-commerce.Data.csproj" Id="11529f36-832a-4bb6-a4b4-e557d66768ac" />
   <Project Path="../E-commerce.Infrastructure/E-commerce.Infrastructure.csproj" Id="69d863ca-072b-42f5-9b1a-8e3864c0fa59" />
-  <Project Path="../E-Commerce.Service/E-Commerce.Service.csproj" Id="f98f02e8-144d-4854-b3e2-b55f2f930666" />
+  <Project Path="../E-Commerce.Service/E-Commerce.Service.csproj" Id="f98f02e8-144d-4854-b3e2-b55f2f930666" DisplayName="E-commerce.Service" />
   <Project Path="E-commerce.Api/E-commerce.Api.csproj" />
 </Solution>

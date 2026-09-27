@@ -11,6 +11,7 @@ public sealed class ProductPageViewDto
     public int CategoryId { get; set; }
     public string CategoryName { get; set; } = string.Empty;
     public string? ImageUrl { get; set; }
+    public IReadOnlyList<string> ImageUrls { get; set; } = Array.Empty<string>();
     public decimal Rating { get; set; }
     public int RatingCount { get; set; }
     public int StockQuantity { get; set; }

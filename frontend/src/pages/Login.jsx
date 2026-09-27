@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../api";
+import { api, getApiErrorMessage } from "../api";
 
-function Login({ onLogin }) {
+function Login({ onLogin, adminOnly = false }) {
   const navigate = useNavigate();
 
   const [identifier, setIdentifier] = useState("");
@@ -14,16 +14,18 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     if (!identifier.trim() || !password) {
-      setError("Please fill in all fields.");
+      setError("عبي كل الخانات عشان نكمل.");
       return;
     }
 
     setSubmitting(true);
     try {
-      const result = await api.signIn(identifier.trim(), password);
+      const result = adminOnly
+        ? await api.adminSignIn(identifier.trim(), password)
+        : await api.signIn(identifier.trim(), password);
       onLogin({ ...result, name: result.userName || identifier.trim().split("@")[0], email: identifier.includes("@") ? identifier.trim() : "" });
-      navigate("/");
-    } catch (reason) { setError(reason.message || "Could not sign in."); }
+      navigate(adminOnly ? "/dashboard" : "/");
+    } catch (reason) { setError(getApiErrorMessage(reason, "ما قدرنا ندخّلك. تأكد من بياناتك وحاول مرة ثانية.")); }
     finally { setSubmitting(false); }
   };
 
@@ -35,16 +37,16 @@ function Login({ onLogin }) {
             <i className="bi bi-person-circle display-4"></i>
 
             <h2 className="fw-bold mt-2">
-              Welcome Back
+              {adminOnly ? "دخول المشرفين" : "يا هلا فيك"}
             </h2>
 
             <p className="text-muted">
-              Sign in to your Shoply account.
+              {adminOnly ? "هالصفحة مخصصة لإدارة متجر Sooq." : "سجّل دخولك لحسابك في Sooq."}
             </p>
           </div>
 
           {error && (
-            <div className="alert alert-danger">
+            <div className="alert alert-danger auth-error-message" role="alert">
               {error}
             </div>
           )}
@@ -52,7 +54,7 @@ function Login({ onLogin }) {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">
-                Username or email
+                اسم المستخدم أو البريد الإلكتروني
               </label>
 
               <input
@@ -69,7 +71,7 @@ function Login({ onLogin }) {
 
             <div className="mb-4">
               <label className="form-label">
-                Password
+                كلمة المرور
               </label>
 
               <input
@@ -84,15 +86,13 @@ function Login({ onLogin }) {
             </div>
 
             <button className="btn btn-dark w-100 btn-lg" disabled={submitting}>
-              {submitting ? "Signing in…" : "Login"}
+              {submitting ? "جاري تسجيل الدخول…" : "دخول"}
             </button>
           </form>
 
           <p className="text-center mt-4 mb-0">
-            Don't have an account?{" "}
-            <Link to="/signup">
-              Create one
-            </Link>
+            ما عندك حساب؟{" "}
+            {!adminOnly && <Link to="/signup">سوّ حسابك</Link>}
           </p>
         </div>
       </div>

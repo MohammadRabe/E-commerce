@@ -23,7 +23,8 @@ public sealed class TokenService(IConfiguration configuration, UserManager<User>
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
         var roles = await users.GetRolesAsync(user);
-        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+        // Emit the same claim type that JwtBearer uses for role authorization.
+        claims.AddRange(roles.Select(role => new Claim("role", role)));
         var credentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"]!)), SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken(jwt["Issuer"], jwt["Audience"], claims,

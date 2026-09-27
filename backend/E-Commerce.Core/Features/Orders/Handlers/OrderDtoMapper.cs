@@ -12,6 +12,8 @@ internal static class OrderDtoMapper
         order.ShippingAddress,
         order.ShippingPhoneNumber,
         order.Items.Sum(item => item.UnitPrice * item.Quantity),
+        order.Currency,
+        order.PaymentStatus,
         order.Items.Select(item => new OrderItemDto(
             item.ProductId,
             item.Quantity,

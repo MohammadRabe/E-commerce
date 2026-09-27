@@ -6,13 +6,14 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "E-Commerce.Service/1.0.0": {
+      "E-commerce.Service/1.0.0": {
         "dependencies": {
           "E-commerce.Data": "1.0.0",
-          "E-commerce.Infrastructure": "1.0.0"
+          "E-commerce.Infrastructure": "1.0.0",
+          "Microsoft.Extensions.Http": "10.0.12"
         },
         "runtime": {
-          "E-Commerce.Service.dll": {}
+          "E-commerce.Service.dll": {}
         }
       },
       "Azure.Core/1.50.0": {
@@ -557,6 +558,22 @@
           }
         }
       },
+      "Microsoft.Extensions.Http/10.0.12": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.12",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.12",
+          "Microsoft.Extensions.Diagnostics": "10.0.12",
+          "Microsoft.Extensions.Logging": "10.0.12",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.12",
+          "Microsoft.Extensions.Options": "10.0.12"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Http.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.1226.42308"
+          }
+        }
+      },
       "Microsoft.Extensions.Identity.Core/10.0.12": {
         "dependencies": {
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "10.0.12",
@@ -962,7 +979,7 @@
     }
   },
   "libraries": {
-    "E-Commerce.Service/1.0.0": {
+    "E-commerce.Service/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1239,6 +1256,13 @@
       "sha512": "sha512-nHwq9aPBdBPYXPti6wYEEfgXddfBrYC+CQLn+qISiwQq5tpfaqDZSKOJNxoe9rfQxGf1c+2wC/qWFe1QYJPYqw==",
       "path": "microsoft.extensions.hosting.abstractions/8.0.1",
       "hashPath": "microsoft.extensions.hosting.abstractions.8.0.1.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Http/10.0.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-x/fnoUGgmIUjSgLR1p6Mpi/vXc1Xe0xDPJnggPp23I6vwM/kY4nxyOjo8i6G5KPVw+esJM+rJsqnHbdjasvCBw==",
+      "path": "microsoft.extensions.http/10.0.12",
+      "hashPath": "microsoft.extensions.http.10.0.12.nupkg.sha512"
     },
     "Microsoft.Extensions.Identity.Core/10.0.12": {
       "type": "package",

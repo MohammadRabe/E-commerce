@@ -8,14 +8,14 @@ function NotFound() {
           404
         </h1>
 
-        <h2>Page Not Found</h2>
+        <h2>الصفحة مو موجودة</h2>
 
         <p className="text-muted">
-          The page you are looking for does not exist.
+          شكلك وصلت لرابط غلط. خلنا نرجعك للمكان الصحيح.
         </p>
 
         <Link to="/" className="btn btn-dark">
-          Go Home
+          للصفحة الرئيسية
         </Link>
       </div>
     </div>

@@ -30,3 +30,38 @@ M:\E-commerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.dl
 M:\E-commerce\backend\E-Commerce.Service\obj\Debug\net10.0\refint\E-Commerce.Service.dll
 M:\E-commerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.pdb
 M:\E-commerce\backend\E-Commerce.Service\obj\Debug\net10.0\ref\E-Commerce.Service.dll
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\E-Commerce.Service.deps.json
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\E-Commerce.Service.dll
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\E-Commerce.Service.pdb
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\E-commerce.Data.dll
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\E-commerce.Infrastructure.dll
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\E-commerce.Data.pdb
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\E-commerce.Infrastructure.pdb
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\ar\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-Commerce.Service\backend\build-check\Debug\net10.0\en\E-commerce.Data.resources.dll
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-Commerce.Service.deps.json
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-Commerce.Service.dll
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-Commerce.Service.pdb
+M:\ecommerce\.buildcheck\api\E-Commerce.Service.deps.json
+M:\ecommerce\.buildcheck\api\E-Commerce.Service.dll
+M:\ecommerce\.buildcheck\api\E-Commerce.Service.pdb
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.csproj.AssemblyReference.cache
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.GeneratedMSBuildEditorConfig.editorconfig
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.AssemblyInfoInputs.cache
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.AssemblyInfo.cs
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.csproj.CoreCompileInputs.cache
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.sourcelink.json
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\E-Commerce.Service.deps.json
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\E-Commerce.Service.dll
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\E-Commerce.Service.pdb
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\E-commerce.Data.dll
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\E-commerce.Infrastructure.dll
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\E-commerce.Data.pdb
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\E-commerce.Infrastructure.pdb
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\ar\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-Commerce.Service\bin\Debug\net10.0\en\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.dll
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\refint\E-Commerce.Service.dll
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\E-Commerce.Service.pdb
+M:\ecommerce\backend\E-Commerce.Service\obj\Debug\net10.0\ref\E-Commerce.Service.dll
+M:\ecommerce\backend\E-commerce.Service\obj\Debug\net10.0\E-commer.149D5BBF.Up2Date

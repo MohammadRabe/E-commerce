@@ -1,4 +1,5 @@
 using E_commerce.Core.Bases;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
@@ -13,6 +14,26 @@ public sealed class GlobalExceptionHandler(
         Exception exception,
         CancellationToken cancellationToken)
     {
+        if (exception is ValidationException validationException)
+        {
+            var validationErrors = validationException.Errors
+                .Select(error => $"{error.PropertyName}: {error.ErrorMessage}")
+                .Distinct()
+                .ToArray();
+            logger.LogWarning(exception,
+                "Request validation failed for {Method} {Path}. TraceId: {TraceId}; Fields: {ValidationFields}",
+                httpContext.Request.Method,
+                httpContext.Request.Path,
+                httpContext.TraceIdentifier,
+                validationException.Errors.Select(error => error.PropertyName).Distinct().ToArray());
+            httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            httpContext.Response.ContentType = "application/json";
+            await httpContext.Response.WriteAsJsonAsync(
+                new Response<object>(HttpStatusCode.BadRequest, false, Message: "Request validation failed.", Errors: validationErrors),
+                cancellationToken);
+            return true;
+        }
+
         logger.LogError(exception,
             "Unhandled exception for {Method} {Path}. TraceId: {TraceId}",
             httpContext.Request.Method,

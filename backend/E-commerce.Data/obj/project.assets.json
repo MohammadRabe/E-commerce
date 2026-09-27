@@ -1155,11 +1155,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "M:\\E-commerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj",
+      "projectUniqueName": "M:\\ecommerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj",
       "projectName": "E-commerce.Data",
-      "projectPath": "M:\\E-commerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj",
+      "projectPath": "M:\\ecommerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj",
       "packagesPath": "C:\\Users\\Alsaad - Group\\.nuget\\packages\\",
-      "outputPath": "M:\\E-commerce\\backend\\E-commerce.Data\\obj\\",
+      "outputPath": "M:\\ecommerce\\backend\\E-commerce.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

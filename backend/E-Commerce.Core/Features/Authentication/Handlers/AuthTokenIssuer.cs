@@ -13,6 +13,6 @@ internal static class AuthTokenIssuer
         user.RefreshToken = refreshToken;
         user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(tokens.RefreshTokenDays);
         await users.UpdateAsync(user);
-        return new(await tokens.CreateAccessTokenAsync(user), refreshToken, user.UserName!);
+        return new(await tokens.CreateAccessTokenAsync(user), refreshToken, user.UserName!, user.FullName);
     }
 }

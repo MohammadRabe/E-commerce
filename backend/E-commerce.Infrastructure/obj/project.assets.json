@@ -4923,11 +4923,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "M:\\E-commerce\\backend\\E-commerce.Infrastructure\\E-commerce.Infrastructure.csproj",
+      "projectUniqueName": "M:\\ecommerce\\backend\\E-commerce.Infrastructure\\E-commerce.Infrastructure.csproj",
       "projectName": "E-commerce.Infrastructure",
-      "projectPath": "M:\\E-commerce\\backend\\E-commerce.Infrastructure\\E-commerce.Infrastructure.csproj",
+      "projectPath": "M:\\ecommerce\\backend\\E-commerce.Infrastructure\\E-commerce.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Alsaad - Group\\.nuget\\packages\\",
-      "outputPath": "M:\\E-commerce\\backend\\E-commerce.Infrastructure\\obj\\",
+      "outputPath": "M:\\ecommerce\\backend\\E-commerce.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4949,8 +4949,8 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "M:\\E-commerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj": {
-              "projectPath": "M:\\E-commerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj"
+            "M:\\ecommerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj": {
+              "projectPath": "M:\\ecommerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj"
             }
           }
         }

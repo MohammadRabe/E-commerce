@@ -14,7 +14,8 @@ public static class ModuleServices
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IOrderService, OrderService>();
-        services.AddSingleton<HttpClient>();
+        services.AddHttpClient();
+        services.AddScoped<IPaymentService, FawaterakPaymentService>();
         services.AddScoped<IImageUploadService, CloudinaryImageUploadService>();
         return services;
     }

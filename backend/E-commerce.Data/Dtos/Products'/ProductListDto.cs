@@ -8,4 +8,5 @@ public sealed record ProductListDto(
     decimal? Discount,
     string CategoryName,
     decimal Rating,
-    string? ImageUrl);
+    string? ImageUrl,
+    int StockQuantity);

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { formatSAR } from "../formatCurrency";
 
 function CartPage({ cart, updateQuantity, removeFromCart }) {
   const total = cart.reduce(
@@ -13,15 +14,15 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
           <i className="bi bi-cart-x display-1 text-muted"></i>
 
           <h2 className="fw-bold mt-3">
-            Your cart is empty
+            سلتك فاضية
           </h2>
 
           <p className="text-muted">
-            Add some products before viewing your cart.
+            يمكن طلبك الجاي هو المفضل عندك.
           </p>
 
           <Link to="/" className="btn btn-dark">
-            Continue Shopping
+            تسوّق المنتجات
           </Link>
         </div>
       </div>
@@ -30,9 +31,8 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
 
   return (
     <div className="container py-5">
-      <h1 className="fw-bold mb-4">
-        Shopping Cart
-      </h1>
+      <p className="eyebrow mb-2">اختياراتك</p>
+      <h1 className="section-title mb-4">سلة التسوق</h1>
 
       <div className="row g-4">
         <div className="col-lg-8">
@@ -57,7 +57,7 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
                     </h6>
 
                     <span className="text-muted">
-                        ${Number(item.price).toFixed(2)}
+                        {formatSAR(item.price)}
                     </span>
                   </div>
 
@@ -65,6 +65,8 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
                     <div className="input-group">
                       <button
                         className="btn btn-outline-secondary"
+                        disabled={item.stockQuantity != null && item.quantity >= Number(item.stockQuantity)}
+                        aria-label={`زيادة كمية ${item.title}`}
                         onClick={() =>
                           updateQuantity(
                             item.id,
@@ -94,10 +96,9 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
                   </div>
 
                   <div className="col-4 col-md-2 text-end fw-bold">
-                    $
-                    {(
+                    {formatSAR(
                       item.price * item.quantity
-                    ).toFixed(2)}
+                    )}
                   </div>
 
                   <div className="col-2 col-md-1 text-end">
@@ -106,7 +107,7 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
                       onClick={() =>
                         removeFromCart(item.id)
                       }
-                      title="Remove item"
+                      title="احذف المنتج"
                     >
                       <i className="bi bi-trash"></i>
                     </button>
@@ -120,36 +121,35 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
         <div className="col-lg-4">
           <div className="card border-0 shadow-sm">
             <div className="card-body">
-              <h4 className="fw-bold">
-                Cart Summary
-              </h4>
+              <p className="eyebrow">باقي خطوة وتتهنى فيها</p>
+              <h4 className="fw-bold">ملخص الطلب</h4>
 
               <hr />
 
               <div className="d-flex justify-content-between mb-2">
-                <span>Subtotal</span>
-                <span>${total.toFixed(2)}</span>
+                <span>المجموع</span>
+                <span>{formatSAR(total)}</span>
               </div>
 
               <div className="d-flex justify-content-between mb-3">
-                <span>Shipping</span>
+                <span>التوصيل</span>
                 <span className="text-success">
-                  Free
+                  علينا
                 </span>
               </div>
 
               <hr />
 
               <div className="d-flex justify-content-between fw-bold fs-5 mb-4">
-                <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>الإجمالي</span>
+                <span>{formatSAR(total)}</span>
               </div>
 
               <Link
                 className="btn btn-dark w-100 btn-lg"
                 to="/checkout"
               >
-                Checkout
+                كمّل الطلب
               </Link>
 
               
@@ -158,7 +158,7 @@ function CartPage({ cart, updateQuantity, removeFromCart }) {
                 to="/"
                 className="btn btn-outline-secondary w-100 mt-3"
               >
-                Continue Shopping
+                كمل تسوّق
               </Link>
             </div>
           </div>

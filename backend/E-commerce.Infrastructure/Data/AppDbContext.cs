@@ -14,6 +14,8 @@ public class AppDbContext : IdentityDbContext<User>
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+    public DbSet<UserNotification> UserNotifications => Set<UserNotification>();
+    public DbSet<UserLike> UserLikes => Set<UserLike>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -54,5 +56,29 @@ public class AppDbContext : IdentityDbContext<User>
         builder.Entity<OrderItem>()
             .ToTable(table => table.HasCheckConstraint(
                 "CK_OrderItems_Quantity_Positive", "[Quantity] > 0"));
+
+        builder.Entity<UserNotification>()
+            .HasOne(notification => notification.RecipientUser)
+            .WithMany(user => user.Notifications)
+            .HasForeignKey(notification => notification.RecipientUserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<UserNotification>()
+            .HasIndex(notification => new { notification.RecipientUserId, notification.CreatedAt });
+
+        builder.Entity<UserLike>()
+            .HasKey(like => new { like.UserId, like.ProductId });
+
+        builder.Entity<UserLike>()
+            .HasOne(like => like.User)
+            .WithMany()
+            .HasForeignKey(like => like.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<UserLike>()
+            .HasOne(like => like.Product)
+            .WithMany()
+            .HasForeignKey(like => like.ProductId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

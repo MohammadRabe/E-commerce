@@ -9,6 +9,9 @@ import "./components/ProductCard/ProductCard.css";
 import "./components/Footer/footer.css";
 import App from "./App";
 
+document.documentElement.lang = "ar";
+document.documentElement.dir = "rtl";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>

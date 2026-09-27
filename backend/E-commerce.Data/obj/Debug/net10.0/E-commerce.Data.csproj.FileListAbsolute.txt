@@ -38,3 +38,40 @@ M:\E-commerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.dll
 M:\E-commerce\backend\E-commerce.Data\obj\Debug\net10.0\refint\E-commerce.Data.dll
 M:\E-commerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.pdb
 M:\E-commerce\backend\E-commerce.Data\obj\Debug\net10.0\ref\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Data\backend\build-check\Debug\net10.0\E-commerce.Data.deps.json
+M:\ecommerce\backend\E-commerce.Data\backend\build-check\Debug\net10.0\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Data\backend\build-check\Debug\net10.0\E-commerce.Data.pdb
+M:\ecommerce\backend\E-commerce.Data\backend\build-check\Debug\net10.0\ar\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Data\backend\build-check\Debug\net10.0\en\E-commerce.Data.resources.dll
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-commerce.Data.deps.json
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-commerce.Data.dll
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-commerce.Data.pdb
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\ar\E-commerce.Data.resources.dll
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\en\E-commerce.Data.resources.dll
+M:\ecommerce\.buildcheck\api\E-commerce.Data.deps.json
+M:\ecommerce\.buildcheck\api\E-commerce.Data.dll
+M:\ecommerce\.buildcheck\api\E-commerce.Data.pdb
+M:\ecommerce\.buildcheck\api\ar\E-commerce.Data.resources.dll
+M:\ecommerce\.buildcheck\api\en\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Data\bin\Debug\net10.0\E-commerce.Data.deps.json
+M:\ecommerce\backend\E-commerce.Data\bin\Debug\net10.0\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Data\bin\Debug\net10.0\E-commerce.Data.pdb
+M:\ecommerce\backend\E-commerce.Data\bin\Debug\net10.0\ar\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Data\bin\Debug\net10.0\en\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.csproj.AssemblyReference.cache
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\CleanArch.Data.Localization.SharedResource.ar.resources
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\CleanArch.Data.Localization.SharedResource.en.resources
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.csproj.GenerateResource.cache
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.GeneratedMSBuildEditorConfig.editorconfig
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.AssemblyInfoInputs.cache
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.AssemblyInfo.cs
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.csproj.CoreCompileInputs.cache
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.sourcelink.json
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\ar\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\en\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\refint\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\E-commerce.Data.pdb
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\ref\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\ar\E-commerce.Data.resources.cs
+M:\ecommerce\backend\E-commerce.Data\obj\Debug\net10.0\en\E-commerce.Data.resources.cs

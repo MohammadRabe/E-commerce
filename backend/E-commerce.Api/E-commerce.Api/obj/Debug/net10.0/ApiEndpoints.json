@@ -1,5 +1,88 @@
 [
   {
+    "ContainingType": "E_commerce.Api.Controllers.Admin.SalesStatisticsController",
+    "Method": "DeleteCustomer",
+    "RelativePath": "api/v1/admin/customers/{userId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Admin.SalesStatisticsController",
+    "Method": "GetCustomers",
+    "RelativePath": "api/v1/admin/getCustomers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Admin.SalesStatisticsController",
+    "Method": "GetOrders",
+    "RelativePath": "api/v1/admin/getOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.Nullable\u00601[[E_commerce.Data.Enum.OrderStatus, E-commerce.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Admin.SalesStatisticsController",
+    "Method": "Get",
+    "RelativePath": "api/v1/admin/getStatistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "E_commerce.Api.Controllers.Authentication.AuthenticationController",
     "Method": "Refresh",
     "RelativePath": "api/v1/auth/refreshToken",
@@ -127,6 +210,36 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "E_commerce.Api.Controllers.Notifications.NotificationsController",
+    "Method": "GetMine",
+    "RelativePath": "api/v1/notifications/mine",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Notifications.NotificationsController",
+    "Method": "ClearMine",
+    "RelativePath": "api/v1/notifications/mine",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Notifications.NotificationsController",
+    "Method": "MarkAllRead",
+    "RelativePath": "api/v1/notifications/read",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "E_commerce.Api.Controllers.Order.OrderController",
     "Method": "GetMyOrders",
     "RelativePath": "api/v1/order",
@@ -186,6 +299,38 @@
   },
   {
     "ContainingType": "E_commerce.Api.Controllers.Order.OrderController",
+    "Method": "CreatePayment",
+    "RelativePath": "api/v1/order/{orderId}/payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Order.OrderController",
+    "Method": "VerifyPayment",
+    "RelativePath": "api/v1/order/{orderId}/payment/verify",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Order.OrderController",
     "Method": "UpdateStatus",
     "RelativePath": "api/v1/order/{orderId}/status",
     "HttpMethod": "PATCH",
@@ -201,6 +346,22 @@
         "Name": "request",
         "Type": "E_commerce.Api.Controllers.Order.OrderController\u002BUpdateOrderStatusRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Order.OrderController",
+    "Method": "GetByStatus",
+    "RelativePath": "api/v1/order/status",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "E_commerce.Data.Enum.OrderStatus",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -359,6 +520,48 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Likes.UserLikesController",
+    "Method": "GetMine",
+    "RelativePath": "api/v1/userLikes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Likes.UserLikesController",
+    "Method": "AddLike",
+    "RelativePath": "api/v1/userLikes/{productId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_commerce.Api.Controllers.Likes.UserLikesController",
+    "Method": "RemoveLike",
+    "RelativePath": "api/v1/userLikes/{productId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
         "Type": "System.Int32",
         "IsRequired": true
       }

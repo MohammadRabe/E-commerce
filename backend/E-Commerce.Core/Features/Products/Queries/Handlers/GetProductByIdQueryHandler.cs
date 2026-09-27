@@ -27,6 +27,7 @@ public sealed class GetProductByIdQueryHandler(IProductService products)
             CategoryId = entity.CategoryId,
             CategoryName = entity.Category.Name,
             ImageUrl = entity.ImagePaths.OrderBy(image => image.Id).Select(image => image.Url).FirstOrDefault(),
+            ImageUrls = entity.ImagePaths.OrderBy(image => image.Id).Select(image => image.Url).ToList(),
             Rating = entity.Rating,
             RatingCount = entity.RatingCount,
             StockQuantity = entity.StockQuantity

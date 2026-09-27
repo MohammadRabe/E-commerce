@@ -34,3 +34,39 @@ M:\E-commerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\refint\E-comme
 M:\E-commerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.pdb
 M:\E-commerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.genruntimeconfig.cache
 M:\E-commerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\ref\E-commerce.Infrastructure.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\E-commerce.Infrastructure.deps.json
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\E-commerce.Infrastructure.runtimeconfig.json
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\E-commerce.Infrastructure.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\E-commerce.Infrastructure.pdb
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\E-commerce.Data.pdb
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\ar\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\backend\build-check\Debug\net10.0\en\E-commerce.Data.resources.dll
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-commerce.Infrastructure.deps.json
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-commerce.Infrastructure.runtimeconfig.json
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-commerce.Infrastructure.dll
+C:\Users\Alsaad - Group\.codex\visualizations\2026\09\23\01a0cf91-1b7a-7920-8282-cf12a16952b8\build\Debug\net10.0\E-commerce.Infrastructure.pdb
+M:\ecommerce\.buildcheck\api\E-commerce.Infrastructure.deps.json
+M:\ecommerce\.buildcheck\api\E-commerce.Infrastructure.runtimeconfig.json
+M:\ecommerce\.buildcheck\api\E-commerce.Infrastructure.dll
+M:\ecommerce\.buildcheck\api\E-commerce.Infrastructure.pdb
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\E-commerce.Infrastructure.deps.json
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\E-commerce.Infrastructure.runtimeconfig.json
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\E-commerce.Infrastructure.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\E-commerce.Infrastructure.pdb
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\E-commerce.Data.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\E-commerce.Data.pdb
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\ar\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\bin\Debug\net10.0\en\E-commerce.Data.resources.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.csproj.AssemblyReference.cache
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.AssemblyInfoInputs.cache
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.AssemblyInfo.cs
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.csproj.CoreCompileInputs.cache
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.sourcelink.json
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commer.D1A2E730.Up2Date
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\refint\E-commerce.Infrastructure.dll
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.pdb
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\E-commerce.Infrastructure.genruntimeconfig.cache
+M:\ecommerce\backend\E-commerce.Infrastructure\obj\Debug\net10.0\ref\E-commerce.Infrastructure.dll

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ku05g7IlkTc=",
+  "dgSpecHash": "OQzYELBONIE=",
   "success": true,
-  "projectFilePath": "M:\\E-commerce\\backend\\E-Commerce.Core\\E-Commerce.Core.csproj",
+  "projectFilePath": "M:\\ecommerce\\backend\\E-Commerce.Core\\E-Commerce.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\azure.core\\1.50.0\\azure.core.1.50.0.nupkg.sha512",
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\azure.identity\\1.17.1\\azure.identity.1.17.1.nupkg.sha512",
@@ -48,6 +48,7 @@
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.12\\microsoft.extensions.diagnostics.abstractions.10.0.12.nupkg.sha512",
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\8.0.0\\microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\8.0.1\\microsoft.extensions.hosting.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\Alsaad - Group\\.nuget\\packages\\microsoft.extensions.http\\10.0.12\\microsoft.extensions.http.10.0.12.nupkg.sha512",
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\microsoft.extensions.identity.core\\10.0.12\\microsoft.extensions.identity.core.10.0.12.nupkg.sha512",
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\microsoft.extensions.identity.stores\\10.0.12\\microsoft.extensions.identity.stores.10.0.12.nupkg.sha512",
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\microsoft.extensions.logging\\10.0.12\\microsoft.extensions.logging.10.0.12.nupkg.sha512",

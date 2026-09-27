@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2kiHCAaNsvA=",
+  "dgSpecHash": "wW3loTcndLw=",
   "success": true,
-  "projectFilePath": "M:\\E-commerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj",
+  "projectFilePath": "M:\\ecommerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\mapster\\10.0.13\\mapster.10.0.13.nupkg.sha512",
     "C:\\Users\\Alsaad - Group\\.nuget\\packages\\mapster.core\\10.0.13\\mapster.core.10.0.13.nupkg.sha512",

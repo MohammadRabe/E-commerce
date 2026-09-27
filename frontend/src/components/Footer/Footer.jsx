@@ -9,18 +9,18 @@ function Footer() {
           <div className="col-lg-5 col-md-6">
             <h2 className="fw-bold mb-3">
               <i className="bi bi-bag-check-fill me-2"></i>
-              Shoply
+              Sooq
             </h2>
 
-            <p className="text-white-50 mb-4">
-              Considered essentials for the spaces you live in and the life you lead.
+            <p className="text-white-50 mb-4 footer-intro">
+              أشياء مختارة بعناية لبيتك ويومك. جودة تعيش معك وتفاصيل تفرّحك.
             </p>
 
             <div className="d-flex gap-3">
               <a
                 href="#"
                 className="text-white fs-4"
-                aria-label="Facebook"
+                aria-label="فيسبوك"
               >
                 <i className="bi bi-facebook"></i>
               </a>
@@ -28,7 +28,7 @@ function Footer() {
               <a
                 href="#"
                 className="text-white fs-4"
-                aria-label="X"
+                aria-label="إكس"
               >
                 <i className="bi bi-twitter-x"></i>
               </a>
@@ -36,7 +36,7 @@ function Footer() {
               <a
                 href="#"
                 className="text-white fs-4"
-                aria-label="WhatsApp"
+                aria-label="واتساب"
               >
                 <i className="bi bi-whatsapp"></i>
               </a>
@@ -44,7 +44,7 @@ function Footer() {
               <a
                 href="#"
                 className="text-white fs-4"
-                aria-label="Instagram"
+                aria-label="إنستغرام"
               >
                 <i className="bi bi-instagram"></i>
               </a>
@@ -53,7 +53,7 @@ function Footer() {
                 target="_blank"
                 href="https://github.com/MohammadRabe/Projects/tree/main/finalProject"
                 className="text-white fs-4"
-                aria-label="GitHub"
+                aria-label="جيت هب"
               >
                 <i className="bi bi-github"></i>
               </a>
@@ -61,7 +61,7 @@ function Footer() {
           </div>
 
           <div className="col-lg-3 col-md-6">
-            <h5 className="fw-bold mb-3">Quick Links</h5>
+            <h5 className="fw-bold mb-3">روابط تهمك</h5>
 
             <ul className="list-unstyled">
               <li className="mb-3">
@@ -69,7 +69,7 @@ function Footer() {
                   to="/"
                   className="footer-link text-decoration-none"
                 >
-                  Home
+                  الرئيسية
                 </Link>
               </li>
 
@@ -78,7 +78,7 @@ function Footer() {
                   href="/#products"
                   className="footer-link text-decoration-none"
                 >
-                  Products
+                  المنتجات
                 </a>
               </li>
 
@@ -87,35 +87,36 @@ function Footer() {
                   to="/cart"
                   className="footer-link text-decoration-none"
                 >
-                  Cart
+                  السلة
                 </Link>
               </li>
             </ul>
           </div>
 
           <div className="col-lg-4 col-md-6">
-            <h5 className="fw-bold mb-3">About Shoply</h5>
+            <h5 className="fw-bold mb-3">عن Sooq</h5>
 
             <p className="text-white-50 mb-2">
-              Thoughtful finds. Everyday favorites.
+              اختيارات مميزة، وأشياء تحبها كل يوم.
             </p>
 
             <p className="text-white-50 mb-0">
-              A little more intention in everything you choose.
+              تسوّق براحتك واختر اللي يناسبك.
             </p>
           </div>
         </div>
 
         <hr className="border-secondary my-4" />
 
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <div className="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2" dir="ltr">
+          <small className="footer-credit" dir="ltr">
+            Built by Eng. Mohammed Rabie
+          </small>
           <small className="text-white-50">
-            © {new Date().getFullYear()} Shoply. All rights reserved.
+            © {new Date().getFullYear()} Sooq. جميع الحقوق محفوظة.
           </small>
 
-          <small className="text-white-50">
-            Built with ❤️ using React
-          </small>
+          
         </div>
       </div>
     </footer>

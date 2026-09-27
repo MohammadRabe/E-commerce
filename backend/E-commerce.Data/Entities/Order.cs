@@ -20,19 +20,31 @@ public class Order
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 
     [Required]
+    [MaxLength(3)]
+    public string Currency { get; set; } = "SAR";
+
+    [MaxLength(100)]
+    public string? PaymentIntentKey { get; set; }
+
+    [MaxLength(20)]
+    public string PaymentStatus { get; set; } = "Unpaid";
+
+    [MaxLength(1000)]
+    public string? PaymentUrl { get; set; }
+
+    [Required]
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
     [Required]
     [MaxLength(500)]
     public string ShippingAddress { get; set; } = string.Empty;
 
+    [Required]
     [MaxLength(30)]
-    public string? ShippingPhoneNumber { get; set; }
+    public string ShippingPhoneNumber { get; set; } = string.Empty;
 
     public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 
     [NotMapped]
     public decimal TotalAmount => Items.Sum(item => item.UnitPrice * item.Quantity);
 }
-
-

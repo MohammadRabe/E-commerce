@@ -15,6 +15,7 @@ public static class ModuleCore
         services.AddMediatR(options =>
         {
             options.RegisterServicesFromAssembly(typeof(ModuleCore).Assembly);
+            options.AddOpenBehavior(typeof(LoggingBehavior<,>));
             options.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
         services.AddValidatorsFromAssembly(typeof(ModuleCore).Assembly);

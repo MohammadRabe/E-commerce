@@ -1,3 +1,17 @@
 footer a:hover {
   color: white !important;
 }
+
+.footer-bottom {
+  text-align: left;
+}
+
+.footer-credit {
+  color: #c3cbd1;
+}
+
+@media (max-width: 767.98px) {
+  .footer-credit {
+    align-self: flex-start;
+  }
+}

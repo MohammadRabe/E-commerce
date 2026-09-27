@@ -10,7 +10,9 @@ public sealed class PlaceOrderValidator : AbstractValidator<PlaceOrderCommand>
     {
         RuleFor(command => command.UserId).NotEmpty();
         RuleFor(command => command.Order.ShippingAddress).NotEmpty().MaximumLength(500);
-        RuleFor(command => command.Order.ShippingPhoneNumber).MaximumLength(30);
+        RuleFor(command => command.Order.ShippingPhoneNumber)
+            .Must(phone => !string.IsNullOrWhiteSpace(phone)).WithMessage("Shipping phone number is required.")
+            .MaximumLength(30);
         RuleFor(command => command.Order.Items).NotNull().Must(items => items.Count > 0)
             .WithMessage("An order must contain at least one item.");
         RuleForEach(command => command.Order.Items).ChildRules(item =>

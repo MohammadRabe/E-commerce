@@ -11,7 +11,8 @@ public sealed class CreateProductCommandValidator : AbstractValidator<CreateProd
         RuleFor(command => command.Description).NotEmpty().MaximumLength(4000);
         RuleFor(command => command.Price).GreaterThan(0);
         RuleFor(command => command.CategoryId).GreaterThan(0);
-        RuleFor(command => command.Images).NotNull().Must(images => images.Count > 0).WithMessage("At least one product image is required.");
+        RuleFor(command => command.Images).NotNull().Must(images => images.Count is > 0 and <= 7)
+            .WithMessage("A product must have between 1 and 7 images.");
         RuleFor(command => command.Rating).InclusiveBetween(0, 5);
         RuleFor(command => command.RatingCount).GreaterThanOrEqualTo(0);
         RuleFor(command => command.StockQuantity).GreaterThanOrEqualTo(0);

@@ -43,9 +43,12 @@ namespace CleanArch.Data.Routing
                 const string orderRule = "/" + v1Rule + "/" + controller;
                 public const string Create = orderRule;
                 public const string GetMyOrders = orderRule;
+                public const string GetByStatus = orderRule + "/status";
                 public const string GetDetails = orderRule + "/{orderId}";
                 public const string Delete = orderRule + "/{orderId}";
                 public const string UpdateStatus = orderRule + "/{orderId}/status";
+                public const string CreatePayment = orderRule + "/{orderId}/payment";
+                public const string VerifyPayment = orderRule + "/{orderId}/payment/verify";
             }
 
             public static class User
@@ -56,6 +59,14 @@ namespace CleanArch.Data.Routing
                 public const string AddUser = userRule + "/" + "addUser";
                 public const string GetPagedUsers = userRule + "/" + "getPagedUsers";
                 public const string GetById = userRule + "/" + "getById/{id}";
+                #endregion
+            }
+            public static class Admin
+            {
+                const string controller = "admin";
+                const string adminRule = "/" + v1Rule + "/" + controller;
+                #region Endpoints
+                public const string GetStatistics = adminRule + "/" + "getStatistics";
                 #endregion
             }
             public static class Authentication

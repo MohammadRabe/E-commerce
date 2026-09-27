@@ -822,6 +822,30 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Microsoft.Extensions.Http/10.0.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "10.0.12",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.12",
+          "Microsoft.Extensions.Diagnostics": "10.0.12",
+          "Microsoft.Extensions.Logging": "10.0.12",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.12",
+          "Microsoft.Extensions.Options": "10.0.12"
+        },
+        "compile": {
+          "lib/net10.0/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
       "Microsoft.Extensions.Identity.Core/10.0.12": {
         "type": "package",
         "dependencies": {
@@ -1391,7 +1415,8 @@
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "E-commerce.Data": "1.0.0",
-          "E-commerce.Infrastructure": "1.0.0"
+          "E-commerce.Infrastructure": "1.0.0",
+          "Microsoft.Extensions.Http": "10.0.12"
         },
         "compile": {
           "bin/placeholder/E-Commerce.Service.dll": {}
@@ -2304,6 +2329,35 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Microsoft.Extensions.Http/10.0.12": {
+      "sha512": "x/fnoUGgmIUjSgLR1p6Mpi/vXc1Xe0xDPJnggPp23I6vwM/kY4nxyOjo8i6G5KPVw+esJM+rJsqnHbdjasvCBw==",
+      "type": "package",
+      "path": "microsoft.extensions.http/10.0.12",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.Http.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Http.targets",
+        "lib/net10.0/Microsoft.Extensions.Http.dll",
+        "lib/net10.0/Microsoft.Extensions.Http.xml",
+        "lib/net462/Microsoft.Extensions.Http.dll",
+        "lib/net462/Microsoft.Extensions.Http.xml",
+        "lib/net8.0/Microsoft.Extensions.Http.dll",
+        "lib/net8.0/Microsoft.Extensions.Http.xml",
+        "lib/net9.0/Microsoft.Extensions.Http.dll",
+        "lib/net9.0/Microsoft.Extensions.Http.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.xml",
+        "microsoft.extensions.http.10.0.12.nupkg.sha512",
+        "microsoft.extensions.http.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "Microsoft.Extensions.Identity.Core/10.0.12": {
       "sha512": "LSAF4Wss2uRbS88TsmyyKw00NThc78RIJ6Y1FIU+Hmo7KOPxyBVg9nvFXErrm9vTFWdIIiLX16fmjM1lfdXCTw==",
       "type": "package",
@@ -3105,11 +3159,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "M:\\E-commerce\\backend\\E-Commerce.Core\\E-Commerce.Core.csproj",
+      "projectUniqueName": "M:\\ecommerce\\backend\\E-Commerce.Core\\E-Commerce.Core.csproj",
       "projectName": "E-Commerce.Core",
-      "projectPath": "M:\\E-commerce\\backend\\E-Commerce.Core\\E-Commerce.Core.csproj",
+      "projectPath": "M:\\ecommerce\\backend\\E-Commerce.Core\\E-Commerce.Core.csproj",
       "packagesPath": "C:\\Users\\Alsaad - Group\\.nuget\\packages\\",
-      "outputPath": "M:\\E-commerce\\backend\\E-Commerce.Core\\obj\\",
+      "outputPath": "M:\\ecommerce\\backend\\E-Commerce.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3131,11 +3185,11 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "M:\\E-commerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj": {
-              "projectPath": "M:\\E-commerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj"
+            "M:\\ecommerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj": {
+              "projectPath": "M:\\ecommerce\\backend\\E-commerce.Data\\E-commerce.Data.csproj"
             },
-            "M:\\E-commerce\\backend\\E-commerce.Service\\E-commerce.Service.csproj": {
-              "projectPath": "M:\\E-commerce\\backend\\E-commerce.Service\\E-commerce.Service.csproj"
+            "M:\\ecommerce\\backend\\E-commerce.Service\\E-commerce.Service.csproj": {
+              "projectPath": "M:\\ecommerce\\backend\\E-commerce.Service\\E-commerce.Service.csproj"
             }
           }
         }

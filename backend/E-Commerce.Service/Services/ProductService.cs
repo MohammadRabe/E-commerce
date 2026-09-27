@@ -29,7 +29,8 @@ public sealed class ProductService: IProductService
                 product.Discount,
                 product.Category.Name,
                 product.Rating,
-                product.ImagePaths.OrderBy(image => image.Id).Select(image => image.Url).FirstOrDefault()))
+                product.ImagePaths.OrderBy(image => image.Id).Select(image => image.Url).FirstOrDefault(),
+                product.StockQuantity))
             .ToPagedList(pageNumber, pageSize, cancellationToken);
 
     public  async Task<IReadOnlyList<Product>> GetAllAsync(

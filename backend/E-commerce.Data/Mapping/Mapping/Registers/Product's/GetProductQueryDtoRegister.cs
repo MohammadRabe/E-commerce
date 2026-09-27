@@ -16,6 +16,7 @@ public sealed class GetProductQueryDtoRegister : IRegister
                 source.Discount,
                 source.Category.Name,
                 source.Rating,
-                source.ImagePaths.OrderBy(image => image.Id).Select(image => image.Url).FirstOrDefault()));
+                source.ImagePaths.OrderBy(image => image.Id).Select(image => image.Url).FirstOrDefault(),
+                source.StockQuantity));
     }
 }

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { api } from "../api";
+import { api, getApiErrorMessage } from "../api";
 
 function Signup({ onLogin }) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    name: "",
+    userName: "",
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: ""
@@ -26,26 +27,32 @@ function Signup({ onLogin }) {
     e.preventDefault();
 
     if (
-      !form.name ||
+      !form.userName ||
+      !form.fullName ||
       !form.email ||
       !form.password ||
       !form.confirmPassword
     ) {
-      setError("Please fill in all fields.");
+      setError("عبي كل الخانات عشان نكمل.");
       return;
     }
 
     if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match.");
+      setError("كلمتا المرور مو متطابقتين.");
+      return;
+    }
+
+    if (form.fullName.trim().split(/\s+/).length !== 2) {
+      setError("اكتب الاسم الأول واسم العائلة فقط.");
       return;
     }
 
     setSubmitting(true);
     try {
-      const result = await api.signUp(form.name, form.email, form.password);
-      onLogin({ ...result, name: result.userName || form.name, email: form.email });
+      const result = await api.signUp(form.userName.trim(), form.fullName.trim(), form.email, form.password);
+      onLogin({ ...result, name: result.fullName || form.fullName.trim(), email: form.email });
       navigate("/");
-    } catch (reason) { setError(reason.message || "Could not create your account."); }
+    } catch (reason) { setError(getApiErrorMessage(reason, "ما قدرنا نسوي حسابك الحين. جرّب مرة ثانية.")); }
     finally { setSubmitting(false); }
   };
 
@@ -57,16 +64,16 @@ function Signup({ onLogin }) {
             <i className="bi bi-person-plus display-4"></i>
 
             <h2 className="fw-bold mt-2">
-              Create Account
+              حساب جديد
             </h2>
 
             <p className="text-muted">
-              Join us for a more considered everyday.
+              حيّاك معنا، تسوّق كل اللي تحتاجه بمكان واحد.
             </p>
           </div>
 
           {error && (
-            <div className="alert alert-danger">
+            <div className="alert alert-danger auth-error-message" role="alert">
               {error}
             </div>
           )}
@@ -74,20 +81,38 @@ function Signup({ onLogin }) {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">
-                Full Name
+                اسم المستخدم
               </label>
 
               <input
-                name="name"
+                name="userName"
                 className="form-control"
-                value={form.name}
+                value={form.userName}
                 onChange={handleChange}
+                autoComplete="username"
+                required
+              />
+              <div className="form-text">اكتب اسم مستخدم بدون مسافات، مثل Mohammed123.</div>
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">
+                الاسم الكامل
+              </label>
+
+              <input
+                name="fullName"
+                className="form-control"
+                value={form.fullName}
+                onChange={handleChange}
+                autoComplete="name"
+                required
               />
             </div>
 
             <div className="mb-3">
               <label className="form-label">
-                Email
+                البريد الإلكتروني
               </label>
 
               <input
@@ -101,7 +126,7 @@ function Signup({ onLogin }) {
 
             <div className="mb-3">
               <label className="form-label">
-                Password
+                كلمة المرور
               </label>
 
               <input
@@ -115,7 +140,7 @@ function Signup({ onLogin }) {
 
             <div className="mb-4">
               <label className="form-label">
-                Confirm Password
+                تأكيد كلمة المرور
               </label>
 
               <input
@@ -128,14 +153,14 @@ function Signup({ onLogin }) {
             </div>
 
             <button className="btn btn-dark w-100 btn-lg">
-              {submitting ? "Creating account…" : "Sign Up"}
+              {submitting ? "جاري إنشاء الحساب…" : "إنشاء حساب"}
             </button>
           </form>
 
           <p className="text-center mt-4 mb-0">
-            Already have an account?{" "}
+            عندك حساب؟{" "}
             <Link to="/login">
-              Login
+              سجّل دخولك
             </Link>
           </p>
         </div>

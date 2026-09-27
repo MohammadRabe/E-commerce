@@ -27,7 +27,6 @@ public static class ModuleInfra
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
-                options.SignIn.RequireConfirmedEmail = true;
             })
             .AddRoles<Microsoft.AspNetCore.Identity.IdentityRole>()
             .AddEntityFrameworkStores<AppDbContext>();

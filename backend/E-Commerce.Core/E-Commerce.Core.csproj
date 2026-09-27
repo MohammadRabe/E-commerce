@@ -28,4 +28,11 @@
     <ProjectReference Include="..\E-commerce.Service\E-commerce.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Payment\Queries\Handlers\" />
+    <Folder Include="Features\Payment\Queries\Models\" />
+    <Folder Include="Features\Payment\Commands\Handlers\" />
+    <Folder Include="Features\Payment\Validators\" />
+  </ItemGroup>
+
 </Project>

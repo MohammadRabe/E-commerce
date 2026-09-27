@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { formatSAR } from "../formatCurrency";
 
 function ProductCard({ product, addToCart }) {
   return (
@@ -21,7 +22,7 @@ function ProductCard({ product, addToCart }) {
         </h5>
 
         <div className="d-flex justify-content-between align-items-center mt-auto pt-3 gap-2">
-          <span className="price">${product.price.toFixed(2)}</span>
+          <span className="price">{formatSAR(product.price)}</span>
 
           <Link
             to={`/product/${product.id}`}

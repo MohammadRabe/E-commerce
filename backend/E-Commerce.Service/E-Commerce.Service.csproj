@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\E-commerce.Data\E-commerce.Data.csproj" />
     <ProjectReference Include="..\E-commerce.Infrastructure\E-commerce.Infrastructure.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.12" />
   </ItemGroup>
 
 </Project>
