@@ -46,24 +46,15 @@ namespace E_commerce.Api
                     .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Error)
                     .Enrich.FromLogContext()
                     .Enrich.WithProperty("Application", "E-commerce.Api")
-                    .WriteTo.Console()
-                    .WriteTo.Seq(seqUrl, apiKey: context.Configuration["Seq:ApiKey"])
-                    .WriteTo.MSSqlServer(
-                        connectionString: databaseConnection,
-                        sinkOptions: new MSSqlServerSinkOptions
-                        {
-                            TableName = "LogEvents",
-                            SchemaName = "dbo",
-                            AutoCreateSqlTable = true
-                        },
-                        restrictedToMinimumLevel: LogEventLevel.Error);
+                    .WriteTo.Console();
+                    
             });
             // Add services to the container.
 
             builder.Services.AddControllers();
             builder.Services.AddSignalR();
             builder.Services.AddCors(options => options.AddPolicy("Frontend", policy =>
-                policy.WithOrigins("https://e-commerce-sooq.vercel.app/")
+                policy.WithOrigins("https://e-commerce-sooq.vercel.app")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()));
@@ -146,12 +137,9 @@ namespace E_commerce.Api
             await DatabaseSeeder.SeedAsync(app.Services);
 
 
-            if (app.Environment.IsDevelopment())
-            {
                 app.UseSwagger();
 
                 app.UseSwaggerUI();
-            }
             // Configure the HTTP request pipeline.
 
             app.Use(async (context, next) =>
