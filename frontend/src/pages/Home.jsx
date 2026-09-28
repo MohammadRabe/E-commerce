@@ -130,7 +130,7 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
             {(() => {
               const product = featuredProducts[activeProductIndex] || featuredProducts[0];
               return <>
-                <Link className="market-product-image" to={`/product/${product.id}`} aria-label={`عرض ${product.title}`}><img src={product.image} alt={product.title} /></Link>
+                <Link className="market-product-image" to={`/product/${product.id}`} aria-label={`عرض ${product.title}`} style={{ backgroundImage: product.image ? `url(${JSON.stringify(product.image)})` : undefined }} />
                 <div className="market-product-copy">
                   <span className="market-promo-eyebrow"><i className="bi bi-stars" aria-hidden="true" /> {categoryLabel(product.category)}</span>
                   <div className="market-product-info-line"><Link to={`/product/${product.id}`}><h2>{product.title}</h2></Link><strong className="market-product-price"><SARPrice value={product.price} /></strong></div>
