@@ -113,6 +113,10 @@ async function refreshAccessToken() {
   return refreshPromise;
 }
 
+export async function refreshSession() {
+  return (await refreshAccessToken())?.accessToken ?? null;
+}
+
 async function request(path, options = {}) {
   const send = () => {
     const token = localStorage.getItem("accessToken");
