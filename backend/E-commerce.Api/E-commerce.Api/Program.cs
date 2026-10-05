@@ -42,6 +42,7 @@ namespace E_commerce.Api
 
                 loggerConfiguration
                     .MinimumLevel.Error()
+                    .MinimumLevel.Override("E_commerce.Service.Services.FawaterakPaymentService", LogEventLevel.Information)
                     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Error)
                     .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Error)
                     .Enrich.FromLogContext()
