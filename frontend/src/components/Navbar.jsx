@@ -2,6 +2,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { isAdmin } from "../auth";
 import SARPrice from "./SARPrice";
+import { api, normalizeProduct } from "../api";
 
 function Navbar({ cartCount, cartItems = [], updateQuantity, removeFromCart, user, logout, searchTerm, setSearchTerm, products = [], notifications = [], onNotificationsRead, onClearNotifications, theme = "light", onToggleTheme }) {
   const navigate = useNavigate();
@@ -15,11 +16,32 @@ function Navbar({ cartCount, cartItems = [], updateQuantity, removeFromCart, use
   const cartCloseTimer = useRef(null);
   const [searchFocused, setSearchFocused] = useState(false);
   const query = searchTerm.trim().toLocaleLowerCase("ar");
-  const suggestions = query
-    ? products.filter((product) => `${product.title} ${product.category} ${product.description || ""}`.toLocaleLowerCase("ar").includes(query)).slice(0, 6)
-    : [];
+  const [suggestions, setSuggestions] = useState([]);
   const unreadCount = notifications.filter((notification) => !notification.read).length;
   const cartTotal = cartItems.reduce((total, item) => total + Number(item.price || 0) * Number(item.quantity || 0), 0);
+
+  useEffect(() => {
+    let active = true;
+    const term = searchTerm.trim();
+    if (!term) {
+      setSuggestions([]);
+      return () => { active = false; };
+    }
+    setSuggestions([]);
+
+    const timer = window.setTimeout(() => {
+      api.productPage(1, 6, term)
+        .then((data) => {
+          if (active) setSuggestions((data?.items ?? data?.Items ?? []).map(normalizeProduct));
+        })
+        .catch(() => { if (active) setSuggestions([]); });
+    }, 250);
+
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
+  }, [searchTerm]);
 
   useEffect(() => {
     if (!cartOpen) return undefined;

@@ -32,7 +32,6 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
   const [activeProductIndex, setActiveProductIndex] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
-  const [apiSearch, setApiSearch] = useState(search.trim());
   const featuredProducts = useMemo(() => [...products]
     .sort((a, b) => (b.rating?.rate || 0) - (a.rating?.rate || 0))
     .slice(0, 5), [products]);
@@ -43,15 +42,10 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
     return () => window.clearInterval(timer);
   }, [carouselPaused, featuredProducts.length]);
   useEffect(() => {
-    const timer = window.setTimeout(() => setApiSearch(search.trim()), 300);
-    return () => window.clearTimeout(timer);
-  }, [search]);
-
-  useEffect(() => {
     let active = true;
     setLoading(true);
     setError("");
-    api.productPage(pageNumber, PAGE_SIZE, apiSearch).then((data) => {
+    api.productPage(pageNumber, PAGE_SIZE).then((data) => {
       if (!active) return;
       const items = data?.items ?? data?.Items ?? [];
       setProducts(shuffleProducts(items.map(normalizeProduct)));
@@ -66,11 +60,11 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
       if (active) setError(getApiErrorMessage(reason, "ما قدرنا نحمّل المنتجات الحين. تأكد من اتصالك وحاول مرة ثانية."));
     }).finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
-  }, [pageNumber, apiSearch]);
+  }, [pageNumber]);
 
   useEffect(() => {
     setPageNumber(1);
-  }, [category, maxPrice, sort, apiSearch]);
+  }, [category, maxPrice, sort]);
 
   useEffect(() => {
     let active = true;
