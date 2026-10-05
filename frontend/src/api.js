@@ -144,7 +144,7 @@ export const api = {
     const query = new URLSearchParams({ pageNumber, pageSize });
     return request(`/product/getPagedProducts?${query}`);
   },
-  products: async (pageNumber = 1, pageSize = 100) => {
+  products: async (pageNumber = 1, pageSize = 30) => {
     const query = new URLSearchParams({ pageNumber, pageSize });
     const data = await request(`/product/getPagedProducts?${query}`);
     return data?.items ?? data ?? [];
