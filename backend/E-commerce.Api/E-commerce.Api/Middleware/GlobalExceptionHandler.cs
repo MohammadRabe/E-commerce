@@ -2,6 +2,7 @@ using E_commerce.Core.Bases;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
+using E_commerce.Service.Exceptions;
 
 namespace E_commerce.Api.Middleware;
 
@@ -30,6 +31,22 @@ public sealed class GlobalExceptionHandler(
             httpContext.Response.ContentType = "application/json";
             await httpContext.Response.WriteAsJsonAsync(
                 new Response<object>(HttpStatusCode.BadRequest, false, Message: "Request validation failed.", Errors: validationErrors),
+                cancellationToken);
+            return true;
+        }
+
+        if (exception is PaymentRuleException paymentException)
+        {
+            logger.LogInformation(
+                "Payment request rejected for {Method} {Path} with status {StatusCode}. TraceId: {TraceId}",
+                httpContext.Request.Method,
+                httpContext.Request.Path,
+                (int)paymentException.StatusCode,
+                httpContext.TraceIdentifier);
+            httpContext.Response.StatusCode = (int)paymentException.StatusCode;
+            httpContext.Response.ContentType = "application/json";
+            await httpContext.Response.WriteAsJsonAsync(
+                Response<object>.Failure(paymentException.Message, paymentException.StatusCode),
                 cancellationToken);
             return true;
         }

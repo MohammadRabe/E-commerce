@@ -7,7 +7,9 @@ using E_commerce.Data.Entities;
 using E_commerce.Data.Options;
 using E_commerce.Infrastructure.Abstraction;
 using E_commerce.Service.Abstraction;
+using E_commerce.Service.Exceptions;
 using Microsoft.Extensions.Options;
+using System.Net;
 
 namespace E_commerce.Service.Services;
 
@@ -28,17 +30,17 @@ public sealed class FawaterakPaymentService(
         if (order is null || order.UserId != userId)
             return null;
         if (order.PaymentStatus == "Paid")
-            throw new InvalidOperationException("This order has already been paid.");
+            throw new PaymentRuleException("هذا الطلب مدفوع بالفعل. يمكنك مراجعة حالته من صفحة طلباتك.", HttpStatusCode.Conflict);
         if (order.Status == E_commerce.Data.Enum.OrderStatus.Cancelled)
-            throw new InvalidOperationException("Cancelled orders cannot be paid.");
+            throw new PaymentRuleException("لا يمكن دفع طلب ملغي. أنشئ طلبًا جديدًا لإتمام الشراء.", HttpStatusCode.Conflict);
         if (!string.IsNullOrWhiteSpace(order.PaymentIntentKey) && !string.IsNullOrWhiteSpace(order.PaymentUrl))
             return new(order.Id, order.PaymentIntentKey, order.PaymentUrl, 0);
         if (order.Items.Count == 0 || order.TotalAmount <= 0)
-            throw new InvalidOperationException("The order has no payable items.");
+            throw new PaymentRuleException("لا يحتوي الطلب على منتجات قابلة للدفع. راجع تفاصيل الطلب أو أنشئ طلبًا جديدًا.", HttpStatusCode.Conflict);
 
         var names = order.User.FullName.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries);
         if (names.Length < 2)
-            throw new InvalidOperationException("The account must have a first and last name before checkout.");
+            throw new PaymentRuleException("أكمل الاسم الأول واسم العائلة في ملفك الشخصي قبل الدفع.", HttpStatusCode.BadRequest);
 
         var request = new CreateTransactionRequest(
             order.Currency,
