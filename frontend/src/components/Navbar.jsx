@@ -17,6 +17,7 @@ function Navbar({ cartCount, cartItems = [], updateQuantity, removeFromCart, use
   const [searchFocused, setSearchFocused] = useState(false);
   const query = searchTerm.trim().toLocaleLowerCase("ar");
   const [suggestions, setSuggestions] = useState([]);
+  const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const unreadCount = notifications.filter((notification) => !notification.read).length;
   const cartTotal = cartItems.reduce((total, item) => total + Number(item.price || 0) * Number(item.quantity || 0), 0);
 
@@ -25,16 +26,26 @@ function Navbar({ cartCount, cartItems = [], updateQuantity, removeFromCart, use
     const term = searchTerm.trim();
     if (!term) {
       setSuggestions([]);
+      setSuggestionsLoading(false);
       return () => { active = false; };
     }
     setSuggestions([]);
+    setSuggestionsLoading(true);
 
     const timer = window.setTimeout(() => {
       api.productPage(1, 6, term)
         .then((data) => {
-          if (active) setSuggestions((data?.items ?? data?.Items ?? []).map(normalizeProduct));
+          if (active) {
+            setSuggestions((data?.items ?? data?.Items ?? []).map(normalizeProduct));
+            setSuggestionsLoading(false);
+          }
         })
-        .catch(() => { if (active) setSuggestions([]); });
+        .catch(() => {
+          if (active) {
+            setSuggestions([]);
+            setSuggestionsLoading(false);
+          }
+        });
     }, 250);
 
     return () => {
@@ -129,7 +140,7 @@ function Navbar({ cartCount, cartItems = [], updateQuantity, removeFromCart, use
               <img src={product.image} alt="" loading="lazy" />
               <span className="search-suggestion-copy"><strong>{product.title}</strong><small>{product.category}</small></span>
               <i className="bi bi-arrow-up-left" aria-hidden="true" />
-            </button>) : <p className="search-suggestions-empty">ما لقينا منتجات تطابق بحثك</p>}
+            </button>) : <p className="search-suggestions-empty">{suggestionsLoading ? "جاري البحث..." : "ما لقينا منتجات تطابق بحثك"}</p>}
           </div>}
         </form>
 
