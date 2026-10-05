@@ -19,9 +19,18 @@ public sealed class ProductService: IProductService
         _uow = uow;
     }
 
-    public async Task<PagedList<ProductListDto>> GetPagedListAsync(int pageNumber, int pageSize, CancellationToken cancellationToken = default,
-        params Expression<Func<Product, object?>>[] includes) =>
-        await _uow.ProductRepository.GetAll(includes: includes)
+    public async Task<PagedList<ProductListDto>> GetPagedListAsync(int pageNumber, int pageSize, string? search, CancellationToken cancellationToken = default,
+        params Expression<Func<Product, object?>>[] includes)
+    {
+        var products = _uow.ProductRepository.GetAll(includes: includes);
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var term = search.Trim();
+            products = products.Where(product => product.Title.Contains(term) ||
+                product.Description.Contains(term) || product.Category.Name.Contains(term));
+        }
+
+        return await products
             .Select(product => new ProductListDto(
                 product.Id,
                 product.Title,
@@ -32,6 +41,7 @@ public sealed class ProductService: IProductService
                 product.ImagePaths.OrderBy(image => image.Id).Select(image => image.Url).FirstOrDefault(),
                 product.StockQuantity))
             .ToPagedList(pageNumber, pageSize, cancellationToken);
+    }
 
     public  async Task<IReadOnlyList<Product>> GetAllAsync(
         CancellationToken cancellationToken = default,

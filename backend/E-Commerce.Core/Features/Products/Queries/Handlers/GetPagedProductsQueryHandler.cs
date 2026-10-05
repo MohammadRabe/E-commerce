@@ -21,7 +21,7 @@ public sealed class GetPagedProductsQueryHandler
     public async Task<Response<PagedList<ProductListDto>>> Handle(
         GetPagedProductsQuery request, CancellationToken cancellationToken)
     {
-        var result = await _prodService.GetPagedListAsync(request.PageNumber, request.PageSize, cancellationToken,
+        var result = await _prodService.GetPagedListAsync(request.PageNumber, request.PageSize, request.Search, cancellationToken,
             product => product.Category,prod => prod.ImagePaths);
 
 

@@ -32,6 +32,7 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
   const [activeProductIndex, setActiveProductIndex] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
+  const [apiSearch, setApiSearch] = useState(search.trim());
   const featuredProducts = useMemo(() => [...products]
     .sort((a, b) => (b.rating?.rate || 0) - (a.rating?.rate || 0))
     .slice(0, 5), [products]);
@@ -42,10 +43,15 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
     return () => window.clearInterval(timer);
   }, [carouselPaused, featuredProducts.length]);
   useEffect(() => {
+    const timer = window.setTimeout(() => setApiSearch(search.trim()), 300);
+    return () => window.clearTimeout(timer);
+  }, [search]);
+
+  useEffect(() => {
     let active = true;
     setLoading(true);
     setError("");
-    api.productPage(pageNumber, PAGE_SIZE).then((data) => {
+    api.productPage(pageNumber, PAGE_SIZE, apiSearch).then((data) => {
       if (!active) return;
       const items = data?.items ?? data?.Items ?? [];
       setProducts(shuffleProducts(items.map(normalizeProduct)));
@@ -60,11 +66,11 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
       if (active) setError(getApiErrorMessage(reason, "ما قدرنا نحمّل المنتجات الحين. تأكد من اتصالك وحاول مرة ثانية."));
     }).finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
-  }, [pageNumber]);
+  }, [pageNumber, apiSearch]);
 
   useEffect(() => {
     setPageNumber(1);
-  }, [category, maxPrice, sort, search]);
+  }, [category, maxPrice, sort, apiSearch]);
 
   useEffect(() => {
     let active = true;
@@ -87,16 +93,12 @@ function Home({ addToCart, search, setSearch, likedProductIds = [], toggleLike, 
   }, [availableCategories, products]);
 
   const filteredProducts = products.filter((product) => {
-    const query = search.trim().toLowerCase();
-    const searchableText = `${product.title} ${product.description || ""} ${categoryLabel(product.category)}`.toLowerCase();
-    const matchesSearch = !query || searchableText.includes(query);
-
     const matchesCategory =
       category === "all" || product.category === category;
 
     const matchesPrice = product.price <= maxPrice;
 
-    return matchesSearch && matchesCategory && matchesPrice;
+    return matchesCategory && matchesPrice;
   }).sort((a, b) => {
     if (sort === "price-low") return a.price - b.price;
     if (sort === "price-high") return b.price - a.price;

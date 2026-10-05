@@ -6,5 +6,5 @@ using MediatR;
 
 namespace E_commerce.Core.Features.Products.Queries.Models;
 
-public sealed record GetPagedProductsQuery(int PageNumber = 1, int PageSize = 20)
+public sealed record GetPagedProductsQuery(int PageNumber = 1, int PageSize = 20, string? Search = null)
     : IRequest<Response<PagedList<ProductListDto>>>;

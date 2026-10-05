@@ -140,8 +140,9 @@ async function request(path, options = {}) {
 }
 
 export const api = {
-  productPage: async (pageNumber = 1, pageSize = 12) => {
+  productPage: async (pageNumber = 1, pageSize = 12, search = "") => {
     const query = new URLSearchParams({ pageNumber, pageSize });
+    if (search.trim()) query.set("search", search.trim());
     return request(`/product/getPagedProducts?${query}`);
   },
   products: async (pageNumber = 1, pageSize = 30) => {

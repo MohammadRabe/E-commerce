@@ -20,9 +20,9 @@ namespace E_commerce.Api.Controllers.Product
 
         [AllowAnonymous]
         [HttpGet(Router.Version1.Product.GetPagedProducts)]
-        public async Task<IActionResult> GetPageProducts(int pageNumber,int PageSize)
+        public async Task<IActionResult> GetPageProducts(int pageNumber, int PageSize, [FromQuery] string? search = null)
         {
-            return NewResult(await _mediator.Send(new GetPagedProductsQuery(pageNumber,PageSize)));
+            return NewResult(await _mediator.Send(new GetPagedProductsQuery(pageNumber, PageSize, search)));
         }
 
         [AllowAnonymous]
