@@ -125,7 +125,7 @@ public sealed class FawaterakPaymentService(
         return new(order.Id, result.Data.IntentKey, result.Data.Url, result.Data.ExpiresIn);
     }
 
-    public async Task<bool?> VerifyPaymentAsync(int orderId, string userId, CancellationToken cancellationToken = default)
+    public async Task<PaymentVerificationResult?> VerifyPaymentAsync(int orderId, string userId, CancellationToken cancellationToken = default)
     {
         using var logScope = BeginPaymentLogScope("verify", orderId);
         var timer = Stopwatch.StartNew();
@@ -151,7 +151,7 @@ public sealed class FawaterakPaymentService(
         }
     }
 
-    private async Task<bool?> VerifyPaymentCoreAsync(int orderId, string userId, CancellationToken cancellationToken)
+    private async Task<PaymentVerificationResult?> VerifyPaymentCoreAsync(int orderId, string userId, CancellationToken cancellationToken)
     {
         var order = await uow.OrderRepository.GetForPaymentAsync(orderId, cancellationToken);
         if (order is null || order.UserId != userId)
@@ -162,12 +162,12 @@ public sealed class FawaterakPaymentService(
         if (order.PaymentStatus == "Paid")
         {
             logger.LogInformation("Payment for order {OrderId} is already recorded as paid", orderId);
-            return true;
+            return new("paid", 1, order.TotalAmount, order.Currency, "already_recorded");
         }
         if (string.IsNullOrWhiteSpace(order.PaymentIntentKey))
         {
             logger.LogWarning("Payment verification stopped because order {OrderId} has no provider intent", orderId);
-            return false;
+            return new("unknown", null, null, null, "missing_provider_intent");
         }
 
         var token = await GetAccessTokenAsync(cancellationToken);
@@ -187,23 +187,24 @@ public sealed class FawaterakPaymentService(
             !string.Equals(result.Data.IntentKey, order.PaymentIntentKey, StringComparison.Ordinal))
             throw new HttpRequestException("Fawaterak could not verify this transaction.");
 
-        if (result.Data.Paid == 1 &&
-            result.Data.Currency.Equals(order.Currency, StringComparison.OrdinalIgnoreCase) &&
-            decimal.Round(result.Data.Total, 2) == decimal.Round(order.TotalAmount, 2))
+        var amountMatches = decimal.Round(result.Data.Total, 2) == decimal.Round(order.TotalAmount, 2);
+        var currencyMatches = string.Equals(result.Data.Currency, order.Currency, StringComparison.OrdinalIgnoreCase);
+        if (result.Data.Paid == 1 && currencyMatches && amountMatches)
         {
             order.PaymentStatus = "Paid";
             order.Status = E_commerce.Data.Enum.OrderStatus.Processing;
             uow.OrderRepository.Edit(order);
             await uow.SaveAsync();
             logger.LogInformation("Payment marked as paid for order {OrderId}", orderId);
-            return true;
+            return new("paid", result.Data.Paid, result.Data.Total, result.Data.Currency, null);
         }
 
         logger.LogWarning("Provider verification did not confirm payment for order {OrderId}; paid flag, currency match, and amount match: {PaidFlag}, {CurrencyMatches}, {AmountMatches}",
             orderId, result.Data.Paid == 1,
-            result.Data.Currency.Equals(order.Currency, StringComparison.OrdinalIgnoreCase),
-            decimal.Round(result.Data.Total, 2) == decimal.Round(order.TotalAmount, 2));
-        return false;
+            currencyMatches, amountMatches);
+        var outcome = result.Data.Paid != 1 ? "pending" : !amountMatches ? "amount_mismatch" : "currency_mismatch";
+        var reason = result.Data.Paid != 1 ? "provider_reports_unpaid" : !amountMatches ? "amount_mismatch" : "currency_mismatch";
+        return new(outcome, result.Data.Paid, result.Data.Total, result.Data.Currency, reason);
     }
 
     private string BuildReturnUrl(int orderId, string result) =>
