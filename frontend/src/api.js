@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || "e-commerce-sooq-gzgdczg3g8gvg8du.polandcentral-01.azurewebsites.net";
+const API_BASE = import.meta.env.VITE_API_URL || "https://e-commerce-sooq-gzgdczg3g8gvg8du.polandcentral-01.azurewebsites.net/api/v1";
 const orderStatusValues = { Pending: 0, Processing: 1, Shipped: 2, Delivered: 3, Cancelled: 4 };
 
 let refreshPromise = null;

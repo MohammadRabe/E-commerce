@@ -61,7 +61,7 @@ public sealed class OrderController(IMediator mediator, IPaymentService payments
         var userId = GetUserId();
         if (userId is null) return Unauthorized();
         var result = await payments.VerifyPaymentAsync(orderId, userId, cancellationToken);
-        return result is null ? NotFound() : Ok(result);
+        return result is null ? NotFound() : Ok(new { isPaid = result.Value });
     }
 
     [HttpDelete(Router.Version1.Order.Delete)]

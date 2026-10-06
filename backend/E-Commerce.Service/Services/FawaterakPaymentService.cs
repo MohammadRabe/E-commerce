@@ -12,8 +12,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Diagnostics;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.IdentityModel.Logging;
 
 namespace E_commerce.Service.Services;
 
@@ -100,23 +98,14 @@ public sealed class FawaterakPaymentService(
                 BuildReturnUrl(order.Id, "pending")),
             new Dictionary<string, int> { ["orderId"] = order.Id });
 
-        var json = JsonSerializer.Serialize(request);
-
-
         var token = await GetAccessTokenAsync(cancellationToken);
         logger.LogInformation("Sending transaction creation request to payment provider for order {OrderId}", orderId);
-
-        var url = $"{settings.Value.ApiBaseUrl.TrimEnd('/')}/createTransaction";
-
-        
-
-        using var message = new HttpRequestMessage(HttpMethod.Post, url);
+        using var message = new HttpRequestMessage(HttpMethod.Post,
+            new Uri(new Uri(settings.Value.ApiBaseUrl.TrimEnd('/') + "/"), "api/v3/createTransaction"));
         message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         message.Content = JsonContent.Create(request, options: JsonOptions);
         using var response = await clients.CreateClient(nameof(FawaterakPaymentService))
             .SendAsync(message, cancellationToken);
-
-
         logger.LogInformation("Payment provider transaction request for order {OrderId} returned HTTP {StatusCode}",
             orderId, (int)response.StatusCode);
         await EnsureGatewaySuccessAsync(response, "create checkout");
@@ -136,7 +125,7 @@ public sealed class FawaterakPaymentService(
         return new(order.Id, result.Data.IntentKey, result.Data.Url, result.Data.ExpiresIn);
     }
 
-    public async Task<PaymentVerificationResult?> VerifyPaymentAsync(int orderId, string userId, CancellationToken cancellationToken = default)
+    public async Task<bool?> VerifyPaymentAsync(int orderId, string userId, CancellationToken cancellationToken = default)
     {
         using var logScope = BeginPaymentLogScope("verify", orderId);
         var timer = Stopwatch.StartNew();
@@ -162,7 +151,7 @@ public sealed class FawaterakPaymentService(
         }
     }
 
-    private async Task<PaymentVerificationResult?> VerifyPaymentCoreAsync(int orderId, string userId, CancellationToken cancellationToken)
+    private async Task<bool?> VerifyPaymentCoreAsync(int orderId, string userId, CancellationToken cancellationToken)
     {
         var order = await uow.OrderRepository.GetForPaymentAsync(orderId, cancellationToken);
         if (order is null || order.UserId != userId)
@@ -173,54 +162,48 @@ public sealed class FawaterakPaymentService(
         if (order.PaymentStatus == "Paid")
         {
             logger.LogInformation("Payment for order {OrderId} is already recorded as paid", orderId);
-            return new("paid", 1, order.TotalAmount, order.Currency, "already_recorded");
+            return true;
         }
         if (string.IsNullOrWhiteSpace(order.PaymentIntentKey))
         {
             logger.LogWarning("Payment verification stopped because order {OrderId} has no provider intent", orderId);
-            return new("unknown", null, null, null, "missing_provider_intent");
+            return false;
         }
 
         var token = await GetAccessTokenAsync(cancellationToken);
         logger.LogInformation("Sending payment verification request to provider for order {OrderId}", orderId);
-        var url = $"{settings.Value.ApiBaseUrl.TrimEnd('/')}/getTransactionData";
-
-        using var message = new HttpRequestMessage(HttpMethod.Post, url);
+        using var message = new HttpRequestMessage(HttpMethod.Post,
+            new Uri(new Uri(settings.Value.ApiBaseUrl.TrimEnd('/') + "/"), "api/v3/getTransactionData"));
         message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         message.Content = JsonContent.Create(new GetTransactionRequest(order.PaymentIntentKey), options: JsonOptions);
         using var response = await clients.CreateClient(nameof(FawaterakPaymentService))
             .SendAsync(message, cancellationToken);
-
-
         logger.LogInformation("Payment provider verification request for order {OrderId} returned HTTP {StatusCode}",
             orderId, (int)response.StatusCode);
         await EnsureGatewaySuccessAsync(response, "verify payment");
-
         var result = await response.Content.ReadFromJsonAsync<GetTransactionResponse>(JsonOptions, cancellationToken)
             ?? throw new HttpRequestException("Fawaterak returned an empty payment verification response.");
         if (!string.Equals(result.Status, "success", StringComparison.OrdinalIgnoreCase) || result.Data is null ||
             !string.Equals(result.Data.IntentKey, order.PaymentIntentKey, StringComparison.Ordinal))
             throw new HttpRequestException("Fawaterak could not verify this transaction.");
 
-        var amountMatches = decimal.Round(result.Data.Total, 2) == decimal.Round(order.TotalAmount, 2);
-        var currencyMatches = string.Equals(result.Data.Currency, order.Currency, StringComparison.OrdinalIgnoreCase);
-        if (result.Data.Paid == 1 )//&& amountMatches && currencyMatches)
+        if (result.Data.Paid == 1 &&
+            result.Data.Currency.Equals(order.Currency, StringComparison.OrdinalIgnoreCase) &&
+            decimal.Round(result.Data.Total, 2) == decimal.Round(order.TotalAmount, 2))
         {
             order.PaymentStatus = "Paid";
             order.Status = E_commerce.Data.Enum.OrderStatus.Processing;
             uow.OrderRepository.Edit(order);
             await uow.SaveAsync();
             logger.LogInformation("Payment marked as paid for order {OrderId}", orderId);
-            return new("paid", result.Data.Paid, result.Data.Total, result.Data.Currency, null);
+            return true;
         }
 
         logger.LogWarning("Provider verification did not confirm payment for order {OrderId}; paid flag, currency match, and amount match: {PaidFlag}, {CurrencyMatches}, {AmountMatches}",
             orderId, result.Data.Paid == 1,
             result.Data.Currency.Equals(order.Currency, StringComparison.OrdinalIgnoreCase),
             decimal.Round(result.Data.Total, 2) == decimal.Round(order.TotalAmount, 2));
-        var outcome = result.Data.Paid != 1 ? "pending" : !amountMatches ? "amount_mismatch" : !currencyMatches ? "currency_mismatch" : "pending";
-        var reason = result.Data.Paid != 1 ? "provider_reports_unpaid" : !amountMatches ? "amount_mismatch" : !currencyMatches ? "currency_mismatch" : null;
-        return new(outcome, result.Data.Paid, result.Data.Total, result.Data.Currency, reason);
+        return false;
     }
 
     private string BuildReturnUrl(int orderId, string result) =>
@@ -291,7 +274,7 @@ public sealed class FawaterakPaymentService(
     private sealed record TokenResponse(
         [property: JsonPropertyName("access_token")] string AccessToken,
         [property: JsonPropertyName("expires_in")] int ExpiresIn);
-    private sealed record CreateTransactionRequest([property: JsonPropertyName("currency")]  string Currency, decimal CartTotal, CustomerRequest Customer,
+    private sealed record CreateTransactionRequest(string Currency, decimal CartTotal, CustomerRequest Customer,
         IReadOnlyList<CartItemRequest> CartItems, RedirectionUrlsRequest RedirectionUrls,
         [property: JsonPropertyName("pay_load")] IReadOnlyDictionary<string, int> PayLoad);
     private sealed record CustomerRequest(
@@ -315,5 +298,5 @@ public sealed class FawaterakPaymentService(
         [property: JsonPropertyName("intent_key")] string? IntentKey,
         int Paid,
         decimal Total,
-         [property: JsonPropertyName("currency")] string Currency);
+        string Currency);
 }
