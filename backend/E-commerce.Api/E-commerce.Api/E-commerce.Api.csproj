@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Remove="Controllers\Authorization\**\*.cs" />
     <Compile Remove="Controllers\User\**\*.cs" />
+    <PackageReference Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
