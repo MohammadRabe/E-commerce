@@ -36,9 +36,9 @@ namespace E_commerce.Api
             builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
             builder.Host.UseSerilog((context, services, loggerConfiguration) =>
             {
+
                 var databaseConnection = context.Configuration.GetConnectionString("Default")
                     ?? throw new InvalidOperationException("Connection string 'Default' was not found.");
-                var seqUrl = context.Configuration["Seq:ServerUrl"] ?? "http://localhost:5341";
 
                 loggerConfiguration
                     .MinimumLevel.Error()
@@ -54,12 +54,20 @@ namespace E_commerce.Api
 
             builder.Services.AddControllers();
             builder.Services.AddSignalR();
-            builder.Services.AddCors(options => options.AddPolicy("Frontend", policy =>
-                policy.WithOrigins("https://e-commerce-sooq.vercel.app")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials()));
-            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("Frontend", policy =>
+                        policy.WithOrigins(
+                                "https://e-commerce-sooq.vercel.app",
+                                "http://localhost:5173"
+                            )
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials());
+                });
+
+                builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
             builder.Services.AddProblemDetails();
             builder.Services.AddScoped<TokenService>();
             builder.Services.AddScoped<E_commerce.Service.Abstraction.IOrderNotificationService, OrderNotificationService>();
